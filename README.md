@@ -4,6 +4,40 @@
 #### eobonsu6@knust.edu.gh
 
 
+#  Modifications made to paper in vgg.py file
+# ---- new imports at top ----
+from collections import OrderedDict
+try:
+    from antialiased_cnns import BlurPool   # pip install antialiased-cnns
+except ImportError:
+    # lightweight, no‑dep fallback
+    class BlurPool(nn.AvgPool2d):
+        def __init__(self, channels, filt_size=3, stride=2):
+            super().__init__(kernel_size=stride, stride=stride)
+
+# ---- replace make_layers() with this version ----
+def make_layers(cfg, in_dims=3, batch_norm=False, aa_downsample=True):
+    """
+    cfg list        : as before
+    aa_downsample   : when True, replaces every MaxPool with BlurPool
+    """
+    layers = []
+    in_channels = in_dims
+    for v in cfg:
+        if v == 'M':                     # down‑sampling block
+            if aa_downsample:
+                layers += [BlurPool(in_channels, stride=2)]
+            else:
+                layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
+        else:
+            conv2d = nn.Conv2d(in_channels, v, kernel_size=3, padding=1, bias=not batch_norm)
+            norm = nn.GroupNorm(8, v) if batch_norm else nn.Identity()
+            layers += [conv2d, norm, nn.ReLU(inplace=True)]
+            in_channels = v
+    return nn.Sequential(*layers)
+
+
+
 Paper: 
 
 Requirements
