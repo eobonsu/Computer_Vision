@@ -5,6 +5,8 @@
 
 
 #  Modifications made to paper in vgg.py file
+
+```
 # ---- new imports at top ----
 from collections import OrderedDict
 try:
@@ -35,7 +37,7 @@ def make_layers(cfg, in_dims=3, batch_norm=False, aa_downsample=True):
             layers += [conv2d, norm, nn.ReLU(inplace=True)]
             in_channels = v
     return nn.Sequential(*layers)
-
+```
 
 
 Paper: 
