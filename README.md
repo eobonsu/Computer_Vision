@@ -1,7 +1,10 @@
-# CUDA: Convolution-based Unlearnable Datasets (CVPR 2023)
-#### Authors: Vinu Sankar Sadasivan, Mahdi Soltanolkotabi, Soheil Feizi
+# “Sharper Shortcuts: Convolution-Based Unlearnable Datasets with Anti-AliasedCNN Baselines”
+#### Emmanuel Osei Bonsu - INDEX NUMBER: PG6262024
+#### Kwame Nkrumah University Of Science and Technology
+#### eobonsu6@knust.edu.gh
 
-Paper: https://arxiv.org/abs/2303.04278
+
+Paper: 
 
 Requirements
 ------------
